@@ -1,9 +1,12 @@
-# Maintainer: Zoltan Guba <zoltan.guba@gubamm.hu>
+# AUR maintainer: Zoltan Guba <zoltan.guba@gubamm.hu>
+# Customprofile maintainer: Noah <noahdcraig@outlook.com>
 # Developer: Maxime Rijnders <ximi.obs@gmail.com>
 
-pkgname=systray-x-git
+_profilename=""
+
+pkgname=systray-x-customprofile-git
 _pkgname=systray-x
-pkgver=0.8.0.r0.g0257ad1
+pkgver=0.9.11.r10.g55fbf74
 pkgrel=1
 pkgdesc="SysTray-X is a system tray extension for Thunderbird 68+. The addon uses the WebExtension API's to control an external system dependent system tray application."
 arch=('any')
@@ -35,4 +38,7 @@ package() {
     install -m 755 -t "${pkgdir}/usr/lib/mozilla/native-messaging-hosts" "${srcdir}/${_pkgname}/app/SysTray_X.json"
     sed -i 's/\/path\/to\/native-messaging\/app/\/usr\/bin/g' "${pkgdir}/usr/lib/mozilla/native-messaging-hosts/SysTray_X.json"
     install -m 755 -t "${pkgdir}/usr/bin" "${srcdir}/${_pkgname}/SysTray-X"
+
+    mkdir -p "${pkgdir}/home/noah/.thunderbird/${_profilename}/extensions"
+    install -m 755 -t "${pkgdir}/home/noah/.thunderbird/${_profilename}/extensions" "${srcdir}/${_pkgname}/systray-x@Ximi1970.xpi"
 }
